@@ -266,5 +266,4 @@ class ProductControllerTest extends TestCase
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertEquals('Product Not Found, Failed to Delete Product', $response->getData()->data);
     }
-
 }
