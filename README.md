@@ -21,7 +21,7 @@ To install the project, follow these steps:
 1. Clone the repository:
 
     ```bash
-    git clone https://gitlab.com/sulitjomar/restAPI-laravel11.git
+    git clone https://github.com/sulitjomar/laravel-11-rest-api-sample.git
     ```
 
 2. Set up your environment configuration:
