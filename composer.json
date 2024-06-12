@@ -49,7 +49,7 @@
             "@php artisan migrate --graceful --ansi"
         ],
         "dev": [
-            "php artisan migrate --seed",
+            "php artisan migrate --seed --force",
             "php artisan test",
             "php artisan vendor:publish --provider 'L5Swagger\\L5SwaggerServiceProvider'",
             "php artisan l5-swagger:generate",
