@@ -1,7 +1,12 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "My API",
+        "title": "Laravel 11 REST API Sample Project",
+        "description": "Explore the capabilities of Laravel 11 by building a RESTful API. This sample project demonstrates best practices and key features such as the repository pattern, PHPUnit testing, and Swagger documentation.",
+        "contact": {
+            "name": "Jomar Sulit",
+            "email": "sulitjomar@gmail.com"
+        },
         "version": "1.0.0"
     },
     "servers": [
