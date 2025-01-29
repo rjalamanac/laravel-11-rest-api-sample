@@ -9,3 +9,17 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource('/products',ProductController::class);
+// Display all books
+Route::get('/books', [BookController::class, 'index']);
+
+// Display a single book
+Route::get('/books/{id}', [BookController::class, 'show']);
+
+// Add a new book
+Route::post('/books', [BookController::class, 'store']);
+
+// Update an existing book
+Route::put('/books/{id}', [BookController::class, 'update']);
+
+// Delete a book
+Route::delete('/books/{id}', [BookController::class, 'destroy']);

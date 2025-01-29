@@ -15,6 +15,20 @@
         }
     ],
     "paths": {
+        "/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get list of books",
+                "operationId": "28b9632495ac5f6f66b2e52001d510e6",
+                "responses": {
+                    "200": {
+                        "description": "A list of books"
+                    }
+                }
+            }
+        },
         "/products": {
             "get": {
                 "tags": [
@@ -241,6 +255,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Books",
+            "description": "API Endpoints of Products"
+        },
         {
             "name": "Products",
             "description": "API Endpoints of Products"
