@@ -10,6 +10,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('/categoria',CategoriaController::class);
-Route::apiResource('/actividad',ActividadController::class);
-Route::apiResource('/alumno',AlumnoController::class);
+Route::apiResource('/categorias',CategoriaController::class);
+Route::apiResource('/actividades',ActividadController::class);
+Route::apiResource('/alumnos',AlumnoController::class);

@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SolicitudActividad extends Model
 {
+    public $table = "solicitud_actividades";
     use HasFactory;
 }
