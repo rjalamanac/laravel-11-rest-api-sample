@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActividadPertenece extends Model
 {
+    public $table = "actividad_pertence";
     use HasFactory;
 }

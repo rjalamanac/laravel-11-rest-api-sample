@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categoria extends Model
 {
+    public $table = "categorias";
     use HasFactory;
     public function actividades()
     {
