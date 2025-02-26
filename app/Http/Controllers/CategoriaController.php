@@ -23,7 +23,32 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return Categoria::all();
+        return response()->json(Categoria::all(), 200);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/categorias",
+     *     summary="Create a new categoria",
+     *     tags={"Categoria"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"nombre"},
+     *             @OA\Property(property="nombre", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(response=201, description="Categoria created"),
+     *     @OA\Response(response=400, description="Bad request")
+     * )
+     */
+    public function store(Request $request)
+    {
+        $categoria = Categoria::create($request->validate([
+            'nombre' => 'required|string|max:255',
+        ]));
+
+        return response()->json($categoria, 201);
     }
 
     /**
@@ -43,7 +68,77 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
-        return Categoria::find($id);
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return response()->json(['message' => 'Categoria not found'], 404);
+        }
+
+        return response()->json($categoria, 200);
+    }
+
+    /**
+     * @OA\Put(
+     *     path="/categorias/{id}",
+     *     summary="Update an existing categoria",
+     *     tags={"Categoria"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="nombre", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Categoria updated"),
+     *     @OA\Response(response=404, description="Categoria not found")
+     * )
+     */
+    public function update(Request $request, $id)
+    {
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return response()->json(['message' => 'Categoria not found'], 404);
+        }
+
+        $categoria->update($request->validate([
+            'nombre' => 'sometimes|string|max:255',
+        ]));
+
+        return response()->json($categoria, 200);
+    }
+
+    /**
+     * @OA\Delete(
+     *     path="/categorias/{id}",
+     *     summary="Delete a categoria",
+     *     tags={"Categoria"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response=204, description="Categoria deleted"),
+     *     @OA\Response(response=404, description="Categoria not found")
+     * )
+     */
+    public function destroy($id)
+    {
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return response()->json(['message' => 'Categoria not found'], 404);
+        }
+
+        $categoria->delete();
+
+        return response()->json(null, 204);
     }
 
     /**

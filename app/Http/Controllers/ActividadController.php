@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
   */
 class ActividadController extends Controller
 {
-    /**
+   /**
      * @OA\Get(
      *     path="/actividades",
      *     summary="Get all actividades",
@@ -24,7 +24,34 @@ class ActividadController extends Controller
      */
     public function index()
     {
-        return Actividad::all();
+        return response()->json(Actividad::all(), 200);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/actividades",
+     *     summary="Create a new actividad",
+     *     tags={"Actividad"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"nombre", "descripcion"},
+     *             @OA\Property(property="nombre", type="string"),
+     *             @OA\Property(property="descripcion", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(response=201, description="Actividad created"),
+     *     @OA\Response(response=400, description="Bad request")
+     * )
+     */
+    public function store(Request $request)
+    {
+        $actividad = Actividad::create($request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+        ]));
+
+        return response()->json($actividad, 201);
     }
 
     /**
@@ -44,7 +71,79 @@ class ActividadController extends Controller
      */
     public function show($id)
     {
-        return Actividad::find($id);
+        $actividad = Actividad::find($id);
+
+        if (!$actividad) {
+            return response()->json(['message' => 'Actividad not found'], 404);
+        }
+
+        return response()->json($actividad, 200);
+    }
+
+    /**
+     * @OA\Put(
+     *     path="/actividades/{id}",
+     *     summary="Update an existing actividad",
+     *     tags={"Actividad"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="nombre", type="string"),
+     *             @OA\Property(property="descripcion", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Actividad updated"),
+     *     @OA\Response(response=404, description="Actividad not found")
+     * )
+     */
+    public function update(Request $request, $id)
+    {
+        $actividad = Actividad::find($id);
+
+        if (!$actividad) {
+            return response()->json(['message' => 'Actividad not found'], 404);
+        }
+
+        $actividad->update($request->validate([
+            'nombre' => 'sometimes|string|max:255',
+            'descripcion' => 'sometimes|string',
+        ]));
+
+        return response()->json($actividad, 200);
+    }
+
+    /**
+     * @OA\Delete(
+     *     path="/actividades/{id}",
+     *     summary="Delete an actividad",
+     *     tags={"Actividad"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response=204, description="Actividad deleted"),
+     *     @OA\Response(response=404, description="Actividad not found")
+     * )
+     */
+    public function destroy($id)
+    {
+        $actividad = Actividad::find($id);
+
+        if (!$actividad) {
+            return response()->json(['message' => 'Actividad not found'], 404);
+        }
+
+        $actividad->delete();
+
+        return response()->json(null, 204);
     }
 
     /**

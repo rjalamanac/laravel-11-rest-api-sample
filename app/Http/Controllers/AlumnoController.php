@@ -23,7 +23,34 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        return Alumno::all();
+        return response()->json(Alumno::all(), 200);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/alumnos",
+     *     summary="Create a new alumno",
+     *     tags={"Alumno"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"nombre", "email"},
+     *             @OA\Property(property="nombre", type="string"),
+     *             @OA\Property(property="email", type="string", format="email")
+     *         )
+     *     ),
+     *     @OA\Response(response=201, description="Alumno created"),
+     *     @OA\Response(response=400, description="Bad request")
+     * )
+     */
+    public function store(Request $request)
+    {
+        $alumno = Alumno::create($request->validate([
+            'nombre' => 'required|string|max:255',
+            'email' => 'required|email|unique:alumnos,email',
+        ]));
+
+        return response()->json($alumno, 201);
     }
 
     /**
@@ -43,7 +70,79 @@ class AlumnoController extends Controller
      */
     public function show($id)
     {
-        return Alumno::find($id);
+        $alumno = Alumno::find($id);
+
+        if (!$alumno) {
+            return response()->json(['message' => 'Alumno not found'], 404);
+        }
+
+        return response()->json($alumno, 200);
+    }
+
+    /**
+     * @OA\Put(
+     *     path="/alumnos/{id}",
+     *     summary="Update an existing alumno",
+     *     tags={"Alumno"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="nombre", type="string"),
+     *             @OA\Property(property="email", type="string", format="email")
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Alumno updated"),
+     *     @OA\Response(response=404, description="Alumno not found")
+     * )
+     */
+    public function update(Request $request, $id)
+    {
+        $alumno = Alumno::find($id);
+
+        if (!$alumno) {
+            return response()->json(['message' => 'Alumno not found'], 404);
+        }
+
+        $alumno->update($request->validate([
+            'nombre' => 'sometimes|string|max:255',
+            'email' => 'sometimes|email|unique:alumnos,email,' . $id,
+        ]));
+
+        return response()->json($alumno, 200);
+    }
+
+    /**
+     * @OA\Delete(
+     *     path="/alumnos/{id}",
+     *     summary="Delete an alumno",
+     *     tags={"Alumno"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response=204, description="Alumno deleted"),
+     *     @OA\Response(response=404, description="Alumno not found")
+     * )
+     */
+    public function destroy($id)
+    {
+        $alumno = Alumno::find($id);
+
+        if (!$alumno) {
+            return response()->json(['message' => 'Alumno not found'], 404);
+        }
+
+        $alumno->delete();
+
+        return response()->json(null, 204);
     }
 
     /**

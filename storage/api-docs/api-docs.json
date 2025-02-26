@@ -27,6 +27,43 @@
                         "description": "List of actividades"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Actividad"
+                ],
+                "summary": "Create a new actividad",
+                "operationId": "c9dc112b093b2f733dd707b3be3b8079",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "descripcion"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Actividad created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
             }
         },
         "/actividades/{id}": {
@@ -49,6 +86,74 @@
                 "responses": {
                     "200": {
                         "description": "Actividad details"
+                    },
+                    "404": {
+                        "description": "Actividad not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Actividad"
+                ],
+                "summary": "Update an existing actividad",
+                "operationId": "95a825ea432e72ee1e894fd30e49222f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Actividad updated"
+                    },
+                    "404": {
+                        "description": "Actividad not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Actividad"
+                ],
+                "summary": "Delete an actividad",
+                "operationId": "45df069236211bbba08f7874ac2dfef0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Actividad deleted"
                     },
                     "404": {
                         "description": "Actividad not found"
@@ -178,6 +283,44 @@
                         "description": "List of alumnos"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Alumno"
+                ],
+                "summary": "Create a new alumno",
+                "operationId": "ea7c58d3b29392f7243dcff059872e96",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Alumno created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
             }
         },
         "/alumnos/{id}": {
@@ -200,6 +343,75 @@
                 "responses": {
                     "200": {
                         "description": "Alumno details"
+                    },
+                    "404": {
+                        "description": "Alumno not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Alumno"
+                ],
+                "summary": "Update an existing alumno",
+                "operationId": "52fe5faa4aab2d0057916b55055d464a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Alumno updated"
+                    },
+                    "404": {
+                        "description": "Alumno not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Alumno"
+                ],
+                "summary": "Delete an alumno",
+                "operationId": "fa263e3b81fbf1d1e3a505d20c10e360",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Alumno deleted"
                     },
                     "404": {
                         "description": "Alumno not found"
@@ -293,20 +505,6 @@
                 }
             }
         },
-        "/books": {
-            "get": {
-                "tags": [
-                    "Books"
-                ],
-                "summary": "Get list of books",
-                "operationId": "28b9632495ac5f6f66b2e52001d510e6",
-                "responses": {
-                    "200": {
-                        "description": "A list of books"
-                    }
-                }
-            }
-        },
         "/categorias": {
             "get": {
                 "tags": [
@@ -317,6 +515,39 @@
                 "responses": {
                     "200": {
                         "description": "List of categorias"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categoria"
+                ],
+                "summary": "Create a new categoria",
+                "operationId": "5262fac7d8d2fea2144b3d9ef99c6635",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Categoria created"
+                    },
+                    "400": {
+                        "description": "Bad request"
                     }
                 }
             }
@@ -341,6 +572,71 @@
                 "responses": {
                     "200": {
                         "description": "Categoria details"
+                    },
+                    "404": {
+                        "description": "Categoria not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Categoria"
+                ],
+                "summary": "Update an existing categoria",
+                "operationId": "32680efa60b9809623c4f4ed282d0c5b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Categoria updated"
+                    },
+                    "404": {
+                        "description": "Categoria not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categoria"
+                ],
+                "summary": "Delete a categoria",
+                "operationId": "5c588af090fa094f2c5794ed8ce16aaa",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Categoria deleted"
                     },
                     "404": {
                         "description": "Categoria not found"
@@ -433,197 +729,6 @@
                     }
                 }
             }
-        },
-        "/products": {
-            "get": {
-                "tags": [
-                    "Products"
-                ],
-                "summary": "Get a list of products",
-                "operationId": "c1ff6f862214e1896c59cfe0491ce0e8",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "List of products"
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/Product"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "No Products Available"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Products"
-                ],
-                "summary": "Store a new product",
-                "operationId": "399770d33fa4672f1216707d0e236763",
-                "requestBody": {
-                    "description": "Product data",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "name",
-                                    "details"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Product Name"
-                                    },
-                                    "details": {
-                                        "type": "string",
-                                        "example": "Product Details"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Product created successfully"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "Server error"
-                    }
-                }
-            }
-        },
-        "/products/{id}": {
-            "get": {
-                "tags": [
-                    "Products"
-                ],
-                "summary": "Display a specific product",
-                "operationId": "b46f4aa73232d0368eee698a082342a4",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of the product",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Product details"
-                    },
-                    "404": {
-                        "description": "Product not found"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Products"
-                ],
-                "summary": "Update a specific product",
-                "operationId": "1419d479f9340e30e67fe21a2ca525b7",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of the product",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "name": {
-                                        "description": "Name of the product",
-                                        "type": "string"
-                                    },
-                                    "details": {
-                                        "description": "Details of the product",
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Product updated successfully"
-                    },
-                    "404": {
-                        "description": "Product not found"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Products"
-                ],
-                "summary": "Delete a specific product",
-                "operationId": "fe34b364a3f192305598b65d04d06b5d",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of the product",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Product deleted successfully"
-                    },
-                    "404": {
-                        "description": "Product not found"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
         }
     },
     "components": {
@@ -669,16 +774,8 @@
             "description": "API Endpoints of Alumno"
         },
         {
-            "name": "Books",
-            "description": "API Endpoints of Products"
-        },
-        {
             "name": "Categoria",
             "description": "API Endpoints of Categoria"
-        },
-        {
-            "name": "Products",
-            "description": "API Endpoints of Products"
         }
     ]
 }
