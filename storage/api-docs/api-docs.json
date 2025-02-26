@@ -15,6 +15,284 @@
         }
     ],
     "paths": {
+        "/actividades": {
+            "get": {
+                "tags": [
+                    "Actividad"
+                ],
+                "summary": "Get all actividades",
+                "operationId": "c801ac63fc582a8e85d03083d61ff9e3",
+                "responses": {
+                    "200": {
+                        "description": "List of actividades"
+                    }
+                }
+            }
+        },
+        "/actividades/{id}": {
+            "get": {
+                "tags": [
+                    "Actividad"
+                ],
+                "summary": "Get a single actividad",
+                "operationId": "03d25023f748fe1d7f1b69896798d13c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Actividad details"
+                    },
+                    "404": {
+                        "description": "Actividad not found"
+                    }
+                }
+            }
+        },
+        "/actividades/{actividadId}/categorias": {
+            "get": {
+                "tags": [
+                    "Actividad"
+                ],
+                "summary": "Get all categories for a specific activity",
+                "operationId": "ef26911c1e011c9cdfafe295103969d6",
+                "parameters": [
+                    {
+                        "name": "actividadId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of categories"
+                    }
+                }
+            }
+        },
+        "/actividades/{actividadId}/alumnos": {
+            "get": {
+                "tags": [
+                    "Actividad"
+                ],
+                "summary": "Get all students for a specific activity",
+                "operationId": "8902e5c64be4b3fcf001bcd05ff0455f",
+                "parameters": [
+                    {
+                        "name": "actividadId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of students"
+                    }
+                }
+            }
+        },
+        "/actividades/{actividadId}/categorias/{categoriaId}": {
+            "post": {
+                "tags": [
+                    "Actividad"
+                ],
+                "summary": "Associate a category with an activity",
+                "operationId": "6f2234a2a3c86b0ed286b69d0d58759f",
+                "parameters": [
+                    {
+                        "name": "actividadId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "categoriaId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category associated successfully"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Actividad"
+                ],
+                "summary": "Remove association between a category and an activity",
+                "operationId": "51059019c9e87f8e7d1a089c70e1c873",
+                "parameters": [
+                    {
+                        "name": "actividadId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "categoriaId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category disassociated successfully"
+                    }
+                }
+            }
+        },
+        "/alumnos": {
+            "get": {
+                "tags": [
+                    "Alumno"
+                ],
+                "summary": "Get all alumnos",
+                "operationId": "70304f65ed5181ea6388593e07279822",
+                "responses": {
+                    "200": {
+                        "description": "List of alumnos"
+                    }
+                }
+            }
+        },
+        "/alumnos/{id}": {
+            "get": {
+                "tags": [
+                    "Alumno"
+                ],
+                "summary": "Get a single alumno",
+                "operationId": "92f23a1367b13c816ca8b7aee397a3f1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Alumno details"
+                    },
+                    "404": {
+                        "description": "Alumno not found"
+                    }
+                }
+            }
+        },
+        "/alumnos/{alumnoId}/actividades": {
+            "get": {
+                "tags": [
+                    "Alumno"
+                ],
+                "summary": "Get all activities for a specific student",
+                "operationId": "79cfb23062287525fa31907472f77cab",
+                "parameters": [
+                    {
+                        "name": "alumnoId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of activities"
+                    }
+                }
+            }
+        },
+        "/alumnos/{alumnoId}/actividades/{actividadId}": {
+            "post": {
+                "tags": [
+                    "Alumno"
+                ],
+                "summary": "Associate an activity with a student",
+                "operationId": "3e2c71801ecf3dd21e94f21d2e62a4e8",
+                "parameters": [
+                    {
+                        "name": "alumnoId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "actividadId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Activity associated successfully"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Alumno"
+                ],
+                "summary": "Remove association between an activity and a student",
+                "operationId": "e8a8c59f9689896e00181e69ae945995",
+                "parameters": [
+                    {
+                        "name": "alumnoId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "actividadId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Activity disassociated successfully"
+                    }
+                }
+            }
+        },
         "/books": {
             "get": {
                 "tags": [
@@ -25,6 +303,133 @@
                 "responses": {
                     "200": {
                         "description": "A list of books"
+                    }
+                }
+            }
+        },
+        "/categorias": {
+            "get": {
+                "tags": [
+                    "Categoria"
+                ],
+                "summary": "Get all categorias",
+                "operationId": "66f747250d1c2a1a99b78b5ffc76ad86",
+                "responses": {
+                    "200": {
+                        "description": "List of categorias"
+                    }
+                }
+            }
+        },
+        "/categorias/{id}": {
+            "get": {
+                "tags": [
+                    "Categoria"
+                ],
+                "summary": "Get a single categoria",
+                "operationId": "c850dd742053be302993ad6e3c2f9f2b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categoria details"
+                    },
+                    "404": {
+                        "description": "Categoria not found"
+                    }
+                }
+            }
+        },
+        "/categorias/{categoriaId}/actividades": {
+            "get": {
+                "tags": [
+                    "Categoria"
+                ],
+                "summary": "Get all activities for a specific category",
+                "operationId": "f7f11850302776d8f2d116e3c99acfb2",
+                "parameters": [
+                    {
+                        "name": "categoriaId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of activities"
+                    }
+                }
+            }
+        },
+        "/categorias/{categoriaId}/actividades/{actividadId}": {
+            "post": {
+                "tags": [
+                    "Categoria"
+                ],
+                "summary": "Associate an activity with a category",
+                "operationId": "4c73efa1327488171df79ad768d1bf08",
+                "parameters": [
+                    {
+                        "name": "categoriaId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "actividadId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Activity associated successfully"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categoria"
+                ],
+                "summary": "Remove association between an activity and a category",
+                "operationId": "82c5d105ea488c72d065f2febca937bf",
+                "parameters": [
+                    {
+                        "name": "categoriaId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "actividadId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Activity disassociated successfully"
                     }
                 }
             }
@@ -256,8 +661,20 @@
     },
     "tags": [
         {
+            "name": "Actividad",
+            "description": "API Endpoints of Actividad"
+        },
+        {
+            "name": "Alumno",
+            "description": "API Endpoints of Alumno"
+        },
+        {
             "name": "Books",
             "description": "API Endpoints of Products"
+        },
+        {
+            "name": "Categoria",
+            "description": "API Endpoints of Categoria"
         },
         {
             "name": "Products",
