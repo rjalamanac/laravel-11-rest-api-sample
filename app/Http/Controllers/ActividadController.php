@@ -35,9 +35,13 @@ class ActividadController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"nombre", "descripcion"},
-     *             @OA\Property(property="nombre", type="string"),
-     *             @OA\Property(property="descripcion", type="string")
+     *             required={"titulo", "descripcion","horario","etapa_educativa","cuota","image"},
+     *             @OA\Property(property="titulo", type="string"),
+     *             @OA\Property(property="descripcion", type="string"),
+     *             @OA\Property(property="horario", type="string"),
+     *             @OA\Property(property="etapa_educativa", type="string"),
+     *             @OA\Property(property="cuota", type="integer"),
+     *             @OA\Property(property="image", type="string")
      *         )
      *     ),
      *     @OA\Response(response=201, description="Actividad created"),
@@ -47,8 +51,12 @@ class ActividadController extends Controller
     public function store(Request $request)
     {
         $actividad = Actividad::create($request->validate([
-            'nombre' => 'required|string|max:255',
+            'titulo' => 'required|string|max:255',
             'descripcion' => 'required|string',
+            'horario' => 'required|string|max:255',
+            'etapa_educativa' => 'required|string',
+            'cuota' => 'required|integer',
+            'image' => 'required|string',
         ]));
 
         return response()->json($actividad, 201);
@@ -93,9 +101,14 @@ class ActividadController extends Controller
      *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(
-     *             @OA\Property(property="nombre", type="string"),
-     *             @OA\Property(property="descripcion", type="string")
+     *           @OA\JsonContent(
+     *             required={"titulo", "descripcion","horario","etapa_educativa","cuota","image"},
+     *             @OA\Property(property="titulo", type="string"),
+     *             @OA\Property(property="descripcion", type="string"),
+     *             @OA\Property(property="horario", type="string"),
+     *             @OA\Property(property="etapa_educativa", type="string"),
+     *             @OA\Property(property="cuota", type="integer"),
+     *             @OA\Property(property="image", type="string")
      *         )
      *     ),
      *     @OA\Response(response=200, description="Actividad updated"),

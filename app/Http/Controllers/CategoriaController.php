@@ -34,8 +34,9 @@ class CategoriaController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"nombre"},
-     *             @OA\Property(property="nombre", type="string")
+     *             required={"nombre","descripcion"},
+     *             @OA\Property(property="nombre", type="string"),
+     *             @OA\Property(property="descripcion", type="string")
      *         )
      *     ),
      *     @OA\Response(response=201, description="Categoria created"),
@@ -46,6 +47,7 @@ class CategoriaController extends Controller
     {
         $categoria = Categoria::create($request->validate([
             'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
         ]));
 
         return response()->json($categoria, 201);
@@ -91,7 +93,8 @@ class CategoriaController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="nombre", type="string")
+     *             @OA\Property(property="nombre", type="string"),
+     *             @OA\Property(property="descripcion", type="string")
      *         )
      *     ),
      *     @OA\Response(response=200, description="Categoria updated"),

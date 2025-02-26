@@ -9,4 +9,5 @@ class SolicitudActividad extends Model
 {
     public $table = "solicitud_actividades";
     use HasFactory;
+    protected $fillable = ['estado','fecha','actividad_id','alumno_id']; 
 }

@@ -40,14 +40,30 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "nombre",
-                                    "descripcion"
+                                    "titulo",
+                                    "descripcion",
+                                    "horario",
+                                    "etapa_educativa",
+                                    "cuota",
+                                    "image"
                                 ],
                                 "properties": {
-                                    "nombre": {
+                                    "titulo": {
                                         "type": "string"
                                     },
                                     "descripcion": {
+                                        "type": "string"
+                                    },
+                                    "horario": {
+                                        "type": "string"
+                                    },
+                                    "etapa_educativa": {
+                                        "type": "string"
+                                    },
+                                    "cuota": {
+                                        "type": "integer"
+                                    },
+                                    "image": {
                                         "type": "string"
                                     }
                                 },
@@ -113,11 +129,31 @@
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "titulo",
+                                    "descripcion",
+                                    "horario",
+                                    "etapa_educativa",
+                                    "cuota",
+                                    "image"
+                                ],
                                 "properties": {
-                                    "nombre": {
+                                    "titulo": {
                                         "type": "string"
                                     },
                                     "descripcion": {
+                                        "type": "string"
+                                    },
+                                    "horario": {
+                                        "type": "string"
+                                    },
+                                    "etapa_educativa": {
+                                        "type": "string"
+                                    },
+                                    "cuota": {
+                                        "type": "integer"
+                                    },
+                                    "image": {
                                         "type": "string"
                                     }
                                 },
@@ -297,15 +333,32 @@
                             "schema": {
                                 "required": [
                                     "nombre",
-                                    "email"
+                                    "apellidos",
+                                    "nombre_responsable",
+                                    "apellido_responsable",
+                                    "email_responsable",
+                                    "telefono_responsable"
                                 ],
                                 "properties": {
                                     "nombre": {
                                         "type": "string"
                                     },
-                                    "email": {
+                                    "apellidos": {
+                                        "type": "string"
+                                    },
+                                    "nombre_responsable": {
+                                        "type": "string"
+                                    },
+                                    "apellido_responsable": {
+                                        "type": "string"
+                                    },
+                                    "email_responsable": {
                                         "type": "string",
                                         "format": "email"
+                                    },
+                                    "telefono_responsable": {
+                                        "type": "string",
+                                        "maxLength": 15
                                     }
                                 },
                                 "type": "object"
@@ -374,9 +427,22 @@
                                     "nombre": {
                                         "type": "string"
                                     },
-                                    "email": {
+                                    "apellidos": {
+                                        "type": "string"
+                                    },
+                                    "nombre_responsable": {
+                                        "type": "string"
+                                    },
+                                    "apellido_responsable": {
+                                        "type": "string"
+                                    },
+                                    "email_responsable": {
                                         "type": "string",
                                         "format": "email"
+                                    },
+                                    "telefono_responsable": {
+                                        "type": "string",
+                                        "maxLength": 15
                                     }
                                 },
                                 "type": "object"
@@ -530,10 +596,14 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "nombre"
+                                    "nombre",
+                                    "descripcion"
                                 ],
                                 "properties": {
                                     "nombre": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
                                         "type": "string"
                                     }
                                 },
@@ -601,6 +671,9 @@
                             "schema": {
                                 "properties": {
                                     "nombre": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
                                         "type": "string"
                                     }
                                 },
@@ -728,39 +801,6 @@
                         "description": "Activity disassociated successfully"
                     }
                 }
-            }
-        }
-    },
-    "components": {
-        "schemas": {
-            "Product": {
-                "title": "Product",
-                "description": "Product model",
-                "properties": {
-                    "id": {
-                        "description": "Product ID",
-                        "type": "integer"
-                    },
-                    "name": {
-                        "description": "Product name",
-                        "type": "string"
-                    },
-                    "details": {
-                        "description": "Product details",
-                        "type": "string"
-                    },
-                    "created_at": {
-                        "description": "Creation timestamp",
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "updated_at": {
-                        "description": "Update timestamp",
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                },
-                "type": "object"
             }
         }
     },

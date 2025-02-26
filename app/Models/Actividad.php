@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Actividad extends Model
 {
     public $table = "actividades";
-    
+
+    protected $fillable = ['titulo','descripcion','horario','etapa_educativa','cuota','image']; 
+
     use HasFactory;
     public function categorias()
     {

@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
   */
 class AlumnoController extends Controller
 {
-    /**
+        /**
      * @OA\Get(
      *     path="/alumnos",
      *     summary="Get all alumnos",
@@ -34,9 +34,13 @@ class AlumnoController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"nombre", "email"},
+     *             required={"nombre", "apellidos", "nombre_responsable", "apellido_responsable", "email_responsable", "telefono_responsable"},
      *             @OA\Property(property="nombre", type="string"),
-     *             @OA\Property(property="email", type="string", format="email")
+     *             @OA\Property(property="apellidos", type="string"),
+     *             @OA\Property(property="nombre_responsable", type="string"),
+     *             @OA\Property(property="apellido_responsable", type="string"),
+     *             @OA\Property(property="email_responsable", type="string", format="email"),
+     *             @OA\Property(property="telefono_responsable", type="string", maxLength=15)
      *         )
      *     ),
      *     @OA\Response(response=201, description="Alumno created"),
@@ -45,10 +49,16 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        $alumno = Alumno::create($request->validate([
+        $data = $request->validate([
             'nombre' => 'required|string|max:255',
-            'email' => 'required|email|unique:alumnos,email',
-        ]));
+            'apellidos' => 'required|string|max:255',
+            'nombre_responsable' => 'required|string|max:255',
+            'apellido_responsable' => 'required|string|max:255',
+            'email_responsable' => 'required|email|unique:alumnos,email_responsable',
+            'telefono_responsable' => 'required|string|max:15',
+        ]);
+
+        $alumno = Alumno::create($data);
 
         return response()->json($alumno, 201);
     }
@@ -94,7 +104,11 @@ class AlumnoController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *             @OA\Property(property="nombre", type="string"),
-     *             @OA\Property(property="email", type="string", format="email")
+     *             @OA\Property(property="apellidos", type="string"),
+     *             @OA\Property(property="nombre_responsable", type="string"),
+     *             @OA\Property(property="apellido_responsable", type="string"),
+     *             @OA\Property(property="email_responsable", type="string", format="email"),
+     *             @OA\Property(property="telefono_responsable", type="string", maxLength=15)
      *         )
      *     ),
      *     @OA\Response(response=200, description="Alumno updated"),
@@ -109,10 +123,16 @@ class AlumnoController extends Controller
             return response()->json(['message' => 'Alumno not found'], 404);
         }
 
-        $alumno->update($request->validate([
+        $data = $request->validate([
             'nombre' => 'sometimes|string|max:255',
-            'email' => 'sometimes|email|unique:alumnos,email,' . $id,
-        ]));
+            'apellidos' => 'sometimes|string|max:255',
+            'nombre_responsable' => 'sometimes|string|max:255',
+            'apellido_responsable' => 'sometimes|string|max:255',
+            'email_responsable' => 'sometimes|email|unique:alumnos,email_responsable,' . $id,
+            'telefono_responsable' => 'sometimes|string|max:15',
+        ]);
+
+        $alumno->update($data);
 
         return response()->json($alumno, 200);
     }
